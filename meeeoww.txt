@@ -1,0 +1,28 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String[] args){
+        int sum = 0;
+        int hallo = 0;
+        Scanner s = new Scanner(System.in);
+        int minutes = Integer.parseInt(s.nextLine());
+        int number = Integer.parseInt(s.nextLine());
+        int[] numbers = new int[number];
+        for (int i=0; i<number; i++){
+            numbers[i] = Integer.parseInt(s.nextLine());
+        }
+        Arrays.sort(numbers);
+
+        for (int num : numbers){
+            sum += num;
+            hallo ++;
+            if (sum > minutes){
+                System.out.println(hallo-1);
+                break;
+            }
+
+        }
+    
+    }
+}
