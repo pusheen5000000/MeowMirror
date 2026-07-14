@@ -1,4 +1,6 @@
 import tensorflow as tf
+import numpy as np
+from sklearn.utils.class_weight import compute_class_weight
 
 DATA_DIR = "./data/"
 IMG_SIZE = (48, 48)
@@ -40,13 +42,13 @@ model = tf.keras.Sequential([
 
     data_augmentation,
     tf.keras.layers.Rescaling(1./255),
-    
+
     tf.keras.layers.Conv2D(16, 3, padding='same', activation='relu'),
     tf.keras.layers.MaxPooling2D(),
-    
+
     tf.keras.layers.Conv2D(32, 3, padding='same', activation='relu'),
     tf.keras.layers.MaxPooling2D(),
-    
+
     tf.keras.layers.Flatten(),
     tf.keras.layers.Dense(128, activation='relu'),
     tf.keras.layers.Dense(num_classes, activation='softmax')
@@ -58,10 +60,16 @@ model.compile(
     metrics=['accuracy']
 )
 
+# compute class weights so underrepresented emotions (like "sad") get more attention
+labels = np.concatenate([y for x, y in train_ds], axis=0)
+class_weights = compute_class_weight('balanced', classes=np.unique(labels), y=labels)
+class_weight_dict = dict(enumerate(class_weights))
+
 model.fit(
     train_ds,
     validation_data=val_ds,
-    epochs=10
+    epochs=10,
+    class_weight=class_weight_dict
 )
 
 model.save('emotion_model.keras')
