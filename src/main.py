@@ -12,7 +12,7 @@ CLASS_NAMES = ["angry", "happy", "neutral", "sad"]
 NEUTRAL_INDEX = CLASS_NAMES.index("neutral")
 NEUTRAL_PENALTY = 0.15  # tweak this — higher = neutral shows up less
 ANGRY_INDEX = CLASS_NAMES.index("angry")
-ANGRY_BOOST = 0.15  # tweak this — higher = angry shows up more
+ANGRY_BOOST = 0.10  # tweak this — higher = angry shows up more
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 CAT_DIR = SCRIPT_DIR / "cat_faces"
