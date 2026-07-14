@@ -7,7 +7,7 @@ model = tf.keras.models.load_model('src/emotion_model.keras')
 
 face_detection = mp.solutions.face_detection.FaceDetection()
 
-CLASS_NAMES = ["angry", "happy", "neutral", "sad", "tongue_out"]
+CLASS_NAMES = ["angry", "happy", "neutral", "sad"]
 
 cap = cv2.VideoCapture(0)
 
